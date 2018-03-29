@@ -1,6 +1,3 @@
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath:[['$','$']]}});</script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 ## 数据准备
 
 我们将采用 [Basketball-Reference.com](Basketball-Reference.com) 中的统计数据。在这个网站中，你可以看到不同球员、队伍、赛季和联盟比赛的基本统计数据，如得分，犯规次数等情况，胜负次数等情况。而我们在这里将会使用 2015-16 NBA Season Summary 中数据。
@@ -34,7 +31,7 @@
 
 这条对比公式就是 **Elo Score 等级分** 制度。Elo 最初是为了在国际象棋中更好地对不同的选手进行等级划分。在现在很多的竞技运动或者游戏中都会采取 Elo 等级分制度对选手或玩家进行等级划分，如足球、篮球、棒球比赛或 LOL，DOTA 等游戏。
 
-在这里我们将基于**国际象棋**比赛，大致地介绍下 Elo 等级划分制度。在上图中 **Eduardo** 在窗户上写下的公式就是根据`Logistic Distribution`计算 PK 双方（A 和 B）对各自的胜率期望值计算公式。假设 A 和 B 的当前等级分为 $R_A$ 和 $R​_B​​$，则 A 对 B 的胜率期望值为：
+在这里我们将基于**国际象棋**比赛，大致地介绍下 Elo 等级划分制度。在上图中 **Eduardo** 在窗户上写下的公式就是根据`Logistic Distribution`计算 PK 双方（A 和 B）对各自的胜率期望值计算公式。假设 A 和 B 的当前等级分为 ![](http://latex.codecogs.com/gif.latex?\R_A) 和 ![](http://latex.codecogs.com/gif.latex?\R_B)，则 A 对 B 的胜率期望值为：
 
 ![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108812711.png)
 
