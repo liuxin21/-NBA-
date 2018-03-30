@@ -36,58 +36,9 @@
 <p>假设棋手A和B的当前等级分分别为
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0b096f1c60d7fdc543f3bc583fe32601f1c2f0cf" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.244ex; height:2.509ex;" alt="R_{A}">
 和
-<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/33d79a4532363bb4ed9602166704c3f98928478f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.244ex; height:2.509ex;" alt="R_{B}">，则按Logistic distribution A对B的胜率期望值当为</p>
-<dl>
-<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle E_{A}={\frac {1}{1+10^{(R_{B}-R_{A})/400}}}.}">
-  <semantics>
-    <mrow class="MJX-TeXAtom-ORD">
-      <mstyle displaystyle="true" scriptlevel="0">
-        <msub>
-          <mi>E</mi>
-          <mrow class="MJX-TeXAtom-ORD">
-            <mi>A</mi>
-          </mrow>
-        </msub>
-        <mo>=</mo>
-        <mrow class="MJX-TeXAtom-ORD">
-          <mfrac>
-            <mn>1</mn>
-            <mrow>
-              <mn>1</mn>
-              <mo>+</mo>
-              <msup>
-                <mn>10</mn>
-                <mrow class="MJX-TeXAtom-ORD">
-                  <mo stretchy="false">(</mo>
-                  <msub>
-                    <mi>R</mi>
-                    <mrow class="MJX-TeXAtom-ORD">
-                      <mi>B</mi>
-                    </mrow>
-                  </msub>
-                  <mo>−<!-- − --></mo>
-                  <msub>
-                    <mi>R</mi>
-                    <mrow class="MJX-TeXAtom-ORD">
-                      <mi>A</mi>
-                    </mrow>
-                  </msub>
-                  <mo stretchy="false">)</mo>
-                  <mrow class="MJX-TeXAtom-ORD">
-                    <mo>/</mo>
-                  </mrow>
-                  <mn>400</mn>
-                </mrow>
-              </msup>
-            </mrow>
-          </mfrac>
-        </mrow>
-        <mo>.</mo>
-      </mstyle>
-    </mrow>
-    <annotation encoding="application/x-tex">{\displaystyle E_{A}={\frac {1}{1+10^{(R_{B}-R_{A})/400}}}.}</annotation>
-  </semantics>
-</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/51346e1c65f857c0025647173ae48ddac904adcb" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.671ex; width:25.004ex; height:6.009ex;" alt="E_{A}={\frac  1{1+10^{{(R_{B}-R_{A})/400}}}}."></span></dd>
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/33d79a4532363bb4ed9602166704c3f98928478f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.244ex; height:2.509ex;" alt="R_{B}">，则按Logistic distribution A对B的胜率期望值当为
+<dl><dd><span>
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/51346e1c65f857c0025647173ae48ddac904adcb" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.671ex; width:25.004ex; height:6.009ex;" alt="E_{A}={\frac  1{1+10^{{(R_{B}-R_{A})/400}}}}."></span></dd>
 </dl>
 <p>类似B对A的胜率为</p>
 <dl>
