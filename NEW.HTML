@@ -1,38 +1,29 @@
-## 数据准备
-
-我们将采用 [Basketball-Reference.com](Basketball-Reference.com) 中的统计数据。在这个网站中，你可以看到不同球员、队伍、赛季和联盟比赛的基本统计数据，如得分，犯规次数等情况，胜负次数等情况。而我们在这里将会使用 2015-16 NBA Season Summary 中数据。
-
-可以直接打包下载：
-`$ wget https://github.com/liuxin21/NBA-predictions/blob/master/data.zip`
-
-在这个2015-16总结的所有表格中，我们将使用的是以下三个数据表格：
-
-1. `15-16Team_Per_Game_Stat.csv`：每支队伍平均每场比赛的表现统计
-2. `15-16Opponent_Per_Game_Stat.csv`：所遇到的对手平均每场比赛的表现统计，所包含的统计数据与上面一致
-3. `15-16Miscellaneous_Stat.csv`：综合统计数据
-
-
-在`data`文件夹中，包含了 2015~2016 年的 NBA 数据 **T,O 和 M** 表，及经处理后的常规赛和挑战赛的比赛数据`2015-2016_result.csv`，这个数据文件是我们通过在`basketball-reference.com`的 2015-16 Schedule and result 的几个月份比赛数据中提取得到的，其中包括三个字段：
-
-*   WTeam: 比赛胜利队伍
-*   LTeam: 失败队伍
-*   WLoc: 胜利队伍一方所在的为主场或是客场 另外一个文件就是`16-17Schedule.csv`，也是经过我们加工处理得到的 NBA 在 2016~2017 年的常规赛的比赛安排，其中包括两个字段：
-*   Vteam: 访问 / 客场作战队伍
-*   Hteam: 主场作战队伍
-
-
-## 数据分析
-
-在获取到数据之后，我们将利用每支队伍**过去的比赛情况**和 **Elo 等级分**来判断每支比赛队伍的可胜概率。在评价到每支队伍过去的比赛情况时，我们将使用到 **Team Per Game Stats**，**Opponent Per Game Stats** 和 **Miscellaneous Stats**（之后简称为 **T、O 和 M** 表）这三个表格的数据，作为代表比赛中某支队伍的比赛特征。我们最终将实现针对每场比赛，预测比赛中哪支队伍最终将会获胜，但并不是给出绝对的胜败情况，而是预判胜利的队伍有多大的获胜概率。因此我们将建立一个代表比赛的**特征向量**。由两支队伍的以往比赛情况统计情况（**T、O 和Ｍ**表），和两个队伍各自的 **Elo** 等级分构成。
-
-关于 **Elo score** 等级分，在`《社交网络》`这部电影中，**Mark**（主人公原型就是扎克伯格，FaceBook 创始人）在电影起初开发的一个美女排名系统就是利用其好友 **Eduardo** 在窗户上写下的排名公式，对不同的女生进行等级制度对比，最后 PK 出胜利的一方。
-
-![](https://github.com/liuxin21/NBA-predictions/blob/master/pic1.png)
-
-这条对比公式就是 **Elo Score 等级分** 制度。Elo 最初是为了在国际象棋中更好地对不同的选手进行等级划分。在现在很多的竞技运动或者游戏中都会采取 Elo 等级分制度对选手或玩家进行等级划分，如足球、篮球、棒球比赛或 LOL，DOTA 等游戏。
-
-在这里我们将基于**国际象棋**比赛，大致地介绍下 Elo 等级划分制度。在上图中 **Eduardo** 在窗户上写下的公式就是根据`Logistic Distribution`计算 PK 双方（A 和 B）对各自的胜率期望值计算公式。
-
+<div class="mw-parser-output"><div id="noteTA-78fac19c" class="noteTA">
+<div class="noteTA-local">
+<div data-noteta-code="zh-hans:水平; zh-tw:水準; zh-hk:水平"></div>
+<div data-noteta-code="zh-hant:網上遊戲; zh-hans:网络游戏; zh-tw:線上遊戲"></div>
+</div>
+</div>
+<p><b>ELO等级分制度</b>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Elo rating system</span></span>）是指由<a href="/wiki/%E5%8C%88%E7%89%99%E5%88%A9" title="匈牙利">匈牙利</a>裔<a href="/wiki/%E7%BE%8E%E5%9B%BD" title="美国">美国</a><a href="/wiki/%E7%89%A9%E7%90%86%E5%AD%A6%E5%AE%B6" title="物理学家">物理学家</a>Arpad Elo创建的一个衡量各类对弈活动水平的评价方法，是当今对弈水平评估的公认的权威方法。被广泛用于<a href="/wiki/%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B" class="mw-redirect" title="国际象棋">国际象棋</a>、<a href="/wiki/%E5%9B%B4%E6%A3%8B" title="围棋">围棋</a>、<a href="/wiki/%E8%B6%B3%E7%90%83" title="足球">足球</a>、<a href="/wiki/%E7%AF%AE%E7%90%83" title="篮球">篮球</a>等运动。線上遊戲<a href="/wiki/%E8%8B%B1%E9%9B%84%E8%81%AF%E7%9B%9F" class="mw-redirect" title="英雄聯盟">英雄聯盟</a>、<a href="/wiki/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C" title="魔兽世界">魔獸世界</a>內的竞技對戰系統也採用此分級制度。</p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle" lang="zh" dir="ltr" xml:lang="zh">
+<h2>目录</h2>
+<span class="toctoggle">&nbsp;[<a role="button" tabindex="0" class="togglelink">隐藏</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#历史"><span class="tocnumber">1</span> <span class="toctext">历史</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#计分方法"><span class="tocnumber">2</span> <span class="toctext">计分方法</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#国际象棋中的等级分"><span class="tocnumber">3</span> <span class="toctext">国际象棋中的等级分</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#参见"><span class="tocnumber">4</span> <span class="toctext">参见</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#注釋"><span class="tocnumber">5</span> <span class="toctext">注釋</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#延伸閱覽"><span class="tocnumber">6</span> <span class="toctext">延伸閱覽</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span id=".E5.8E.86.E5.8F.B2"></span><span class="mw-headline" id="历史">历史</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%E7%AD%89%E7%BA%A7%E5%88%86&amp;action=edit&amp;section=1" title="编辑小节：历史">编辑</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>ELO等级分制度是基于<a href="/wiki/%E7%BB%9F%E8%AE%A1%E5%AD%A6" title="统计学">统计学</a>的一个评估棋手水平的方法。<a href="/wiki/%E7%BE%8E%E5%9B%BD" title="美国">美国</a><a href="/wiki/%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B" class="mw-redirect" title="国际象棋">国际象棋</a>协会在1960年首先使用这种计分方法。由于它比先前的方法更公平客观，这种方法很快流行开来。1970年国际棋联正式开始使用等级分制度。</p>
+<p>Elo模型原先采用<a href="/wiki/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83" title="正态分布">正态分布</a>。但是实践显明棋手的表现并非呈正态分布，所以现在的等级分计分系统通常使用的是<span class="ilh-all" data-orig-title="逻辑分布" data-lang-code="en" data-lang-name="英语" data-foreign-title="Logistic distribution"><span class="ilh-page"><a href="/w/index.php?title=%E9%80%BB%E8%BE%91%E5%88%86%E5%B8%83&amp;action=edit&amp;redlink=1" class="new" original-title="逻辑分布（页面不存在）">逻辑分布</a></span><span class="noprint ilh-comment">（<span class="ilh-lang">英语</span><span class="ilh-colon">：</span><span class="ilh-link"><a href="https://en.wikipedia.org/wiki/Logistic_distribution" class="extiw" title="en:Logistic distribution"><span lang="en" dir="auto" xml:lang="en">Logistic distribution</span></a></span>）</span></span>。</p>
+<h2><span id=".E8.AE.A1.E5.88.86.E6.96.B9.E6.B3.95"></span><span class="mw-headline" id="计分方法">计分方法</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%E7%AD%89%E7%BA%A7%E5%88%86&amp;action=edit&amp;section=2" title="编辑小节：计分方法">编辑</a><span class="mw-editsection-bracket">]</span></span></h2>
 <p>假设棋手A和B的当前等级分分别为<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle R_{A}}">
   <semantics>
     <mrow class="MJX-TeXAtom-ORD">
@@ -406,24 +397,36 @@
 </ul>
 
 
-
-
-假设 A 和 B 的当前等级分为 ![](http://latex.codecogs.com/gif.latex?R_A) 和 ![](http://latex.codecogs.com/gif.latex?R_B)，则 A 对 B 的胜率期望值为：
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108812711.png)
-
-B 对 A 的胜率期望值为
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108823190.png)
-
-如果棋手 A 在比赛中的真实得分 <math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">S_A</annotation></semantics></math>S​A​​（胜 1 分，和 0.5 分，负 0 分）和他的胜率期望值 <math><semantics><mrow><msub><mi>E</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">E_A</annotation></semantics></math>E​A​​不同，则他的等级分要根据以下公式进行调整：
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108835437.png)
-
-在国际象棋中，根据等级分的不同 K 值也会做相应的调整：
-
-*   <math><semantics><mrow><mo>≥</mo><mn>2</mn><mn>4</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">\ge2400</annotation></semantics></math>≥2400，K=16
-*   2100~2400 分，K=24
-*   <math><semantics><mrow><mo>≤</mo><mn>2</mn><mn>1</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">\le2100</annotation></semantics></math>≤2100，K=32
-
-因此我们将会用以表示某场比赛数据的**特征向量**为（加入 A 与 B 队比赛）：[A 队 Elo score, A 队的 **T,O 和 M 表**统计数据，B 队 Elo score, B 队的 **T,O 和 M 表**统计数据]
+<!-- 
+NewPP limit report
+Parsed by mw1324
+Cached time: 20180324205154
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.160 seconds
+Real time usage: 0.260 seconds
+Preprocessor visited node count: 790/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 7678/2097152 bytes
+Template argument size: 481/2097152 bytes
+Highest expansion depth: 8/40
+Expensive parser function count: 2/500
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 773/5000000 bytes
+Lua time usage: 0.042/10.000 seconds
+Lua memory usage: 872 KB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  128.178      1 -total
+ 45.63%   58.486      1 Template:NoteTA
+ 21.82%   27.973      8 Template:Flag
+ 16.36%   20.967      2 Template:Le
+ 12.94%   16.592      2 Template:Internal_link_helper
+  5.79%    7.418      1 Template:NOR
+  4.17%    5.339      1 Template:BUL
+  4.15%    5.324      1 Template:ARM
+  4.05%    5.189      1 Template:USA
+  3.48%    4.455      2 Template:Lan
+-->
+</div>
