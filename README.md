@@ -49,25 +49,4 @@
 <p>例如，棋手A等级分为1613，与等级分为1573的棋手B战平。若K取32，则A的胜率期望值为<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/adb225215c4ce787233d8ea15e6fee3d834cb7ca" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.671ex; width:19.818ex; height:6.009ex;" alt="{\frac  1{1+10^{{(1573-1613)/400}}}}">，约为0.5573，因而A的新等级分为1613 + 32 · (0.5 − 0.5573) = 1611.166</p>
 
 
-
-
-
-假设 A 和 B 的当前等级分为 ![](http://latex.codecogs.com/gif.latex?R_A) 和 ![](http://latex.codecogs.com/gif.latex?R_B)，则 A 对 B 的胜率期望值为：
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108812711.png)
-
-B 对 A 的胜率期望值为
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108823190.png)
-
-如果棋手 A 在比赛中的真实得分 <math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">S_A</annotation></semantics></math>S​A​​（胜 1 分，和 0.5 分，负 0 分）和他的胜率期望值 <math><semantics><mrow><msub><mi>E</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">E_A</annotation></semantics></math>E​A​​不同，则他的等级分要根据以下公式进行调整：
-
-![](https://dn-anything-about-doc.qbox.me/document-uid291340labid2647timestamp1490108835437.png)
-
-在国际象棋中，根据等级分的不同 K 值也会做相应的调整：
-
-*   <math><semantics><mrow><mo>≥</mo><mn>2</mn><mn>4</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">\ge2400</annotation></semantics></math>≥2400，K=16
-*   2100~2400 分，K=24
-*   <math><semantics><mrow><mo>≤</mo><mn>2</mn><mn>1</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">\le2100</annotation></semantics></math>≤2100，K=32
-
 因此我们将会用以表示某场比赛数据的**特征向量**为（加入 A 与 B 队比赛）：[A 队 Elo score, A 队的 **T,O 和 M 表**统计数据，B 队 Elo score, B 队的 **T,O 和 M 表**统计数据]
