@@ -33,21 +33,13 @@
 
 在这里我们将基于**国际象棋**比赛，大致地介绍下 Elo 等级划分制度。在上图中 **Eduardo** 在窗户上写下的公式就是根据`Logistic Distribution`计算 PK 双方（A 和 B）对各自的胜率期望值计算公式。
 
-<p>假设棋手A和B的当前等级分分别为<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle R_{A}}">
-  <semantics>
-    <mrow class="MJX-TeXAtom-ORD">
-      <mstyle displaystyle="true" scriptlevel="0">
-        <msub>
-          <mi>R</mi>
-          <mrow class="MJX-TeXAtom-ORD">
-            <mi>A</mi>
-          </mrow>
-        </msub>
-      </mstyle>
-    </mrow>
-    <annotation encoding="application/x-tex">{\displaystyle R_{A}}</annotation>
-  </semantics>
-</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0b096f1c60d7fdc543f3bc583fe32601f1c2f0cf" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.229ex; height:2.509ex;" alt="R_{A}"></span>和<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle R_{B}}">
+<p>假设棋手A和B的当前等级分分别为
+<span class="mwe-math-element">
+
+    <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0b096f1c60d7fdc543f3bc583fe32601f1c2f0cf" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.229ex; height:2.509ex;" alt="R_{A}">
+</span>
+和
+<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle R_{B}}">
   <semantics>
     <mrow class="MJX-TeXAtom-ORD">
       <mstyle displaystyle="true" scriptlevel="0">
